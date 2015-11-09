@@ -3,9 +3,16 @@ import java.util.ArrayList;
 
 public class Deck {
 
+	/** By coding these in as final constants, allows for possibly differently sized decks
+	 ** and different suits in the future
+	 **/
 	public static final int SIZE = 52;
 	public static final String[] SUITS = {"hearts", "clubs", "diamonds", "spades"};
 
+	/** Rather than delete elements from cards when we GetNextCard(), we just increment a counter.
+	 ** Saves us trouble of regenerating the deck on Shuffle() 
+	 ** We use an ArrayList to take advantage of Java's innate Collections API
+	 **/
 	private int curr_index;
 	private ArrayList<Card> cards;
 
