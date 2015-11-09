@@ -1,4 +1,5 @@
-
+import java.util.Collections;
+import java.util.ArrayList;
 
 public class Deck {
 
@@ -35,7 +36,7 @@ public class Deck {
 	 ** tracking where we are in cards
 	 **/
 	public Card GetNextCard() {
-		if (curr_index == SIZE - 1) {
+		if (curr_index == SIZE) {
 			System.out.println("No cards are remaining!");
 			return null;
 		}
@@ -53,5 +54,40 @@ public class Deck {
 			suit = s;
 			num = n;
 		}
+
+		public String toString() {
+			return Integer.toString(num) + ", " + suit;
+		}
+	}
+
+	/** For testing **/
+	public static void main(String[] args) {
+		System.out.println("Testing Deck...");
+		Deck deck = new Deck();
+		System.out.println("Printing all cards in generated order.");
+		ArrayList<Card> other_deck = new ArrayList<Card>();
+		for (int i = 0; i < SIZE; i += 1) {
+			Card c = deck.GetNextCard();
+			System.out.println(c.toString());
+			other_deck.add(c);
+		}
+		System.out.println();
+		System.out.println("Testing pulling cards when deck is empty.");
+		System.out.println("Should display error message.");
+		deck.GetNextCard();
+		System.out.println();
+		System.out.println("Shuffling..");
+		deck.Shuffle();
+		System.out.println();
+		System.out.println("Printing out cards in shuffled order.");
+		System.out.println("Also checking to make sure all cards are accounted for.");
+		for (int i = 0; i < SIZE; i += 1) {
+			Card c = deck.GetNextCard();
+			System.out.println(c.toString());
+			if (!other_deck.contains(c)) {
+				System.out.println("Error! A card has not been accounted for.");
+			}
+		}
+		System.out.println("If there were no error messages, all cards have been accounted.");
 	}
 }
